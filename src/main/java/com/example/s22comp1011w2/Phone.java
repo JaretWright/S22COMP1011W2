@@ -22,14 +22,13 @@ public class Phone {
      */
     public Phone(String make, String model, String os, int ram, int backCameraMP, double price, int batteryLifeInHours, int quantityInStock) {
         setMake(make);
-
-        this.model = model;
-        this.os = os;
-        this.ram = ram;
-        this.backCameraMP = backCameraMP;
-        this.price = price;
-        this.batteryLifeInHours = batteryLifeInHours;
-        this.quantityInStock = quantityInStock;
+        setModel(model);
+        setOs(os);
+        setRam(ram);
+        setBackCameraMP(backCameraMP);
+        setPrice(price);
+        setBatteryLifeInHours(batteryLifeInHours);
+        setQuantityInStock(quantityInStock);
     }
 
     /**
@@ -43,5 +42,128 @@ public class Phone {
             this.make = make;
         else
             throw new IllegalArgumentException(make + " is not valid, choose from " + manufacturers);
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        model = model.trim();
+        if (model.length()>=2)
+            this.model = model;
+        else
+            throw new IllegalArgumentException("invalid model, must be 2 or more characters");
+    }
+
+    public String getOs() {
+        return os;
+    }
+
+    /**
+     * setOs defines the operating system for the phone
+     * @param os must be iOS or Android
+     */
+    public void setOs(String os) {
+        if (os.equalsIgnoreCase("iOS"))
+            this.os = "iOS";
+        else if (os.equalsIgnoreCase("android"))
+            this.os = "Android";
+        else
+            throw new IllegalArgumentException("os must be iOS or Android");
+    }
+
+    public int getRam() {
+        return ram;
+    }
+
+    /**
+     * How many Gigs of memory are  on the phone
+     * @param ram - 64, 128, 256 or 512
+     */
+    public void setRam(int ram) {
+        if (ram == 64 || ram == 128 || ram==256 || ram==512)
+            this.ram = ram;
+        else
+            throw new IllegalArgumentException("RAM must be 64, 128, 256 or 512");
+    }
+
+    public int getBackCameraMP() {
+        return backCameraMP;
+    }
+
+    /**
+     * The MegalPixel capacity of the rear main camera
+     * @param backCameraMP - must be greater than 0
+     */
+    public void setBackCameraMP(int backCameraMP) {
+        if (backCameraMP>0)
+            this.backCameraMP = backCameraMP;
+        else
+            throw new IllegalArgumentException("back camera MP must be greater than 0");
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    /**
+     * This is the MSRP (manufacturer suggested retail price)
+     * @param price - greater than or equal to 0
+     */
+    public void setPrice(double price) {
+        if (price >= 0)
+            this.price = price;
+        else
+            throw new IllegalArgumentException("price must be greater than or equal to 0");
+    }
+
+    public int getBatteryLifeInHours() {
+        return batteryLifeInHours;
+    }
+
+    /**
+     * How long the phone should last with moderate use between charges
+     * @param batteryLifeInHours >0 to 240
+     */
+    public void setBatteryLifeInHours(int batteryLifeInHours) {
+        if (batteryLifeInHours> 0 && batteryLifeInHours<=240)
+            this.batteryLifeInHours = batteryLifeInHours;
+        else
+            throw new IllegalArgumentException("Battery life must be >0 up to 240");
+    }
+
+    public int getQuantityInStock() {
+        return quantityInStock;
+    }
+
+    public void setQuantityInStock(int quantityInStock) {
+        if (quantityInStock>=0)
+            this.quantityInStock = quantityInStock;
+        else
+            throw new IllegalArgumentException("quantity in stock must be 0 or higher");
+    }
+
+    public int sellPhone(int numberSold)
+    {
+        if (numberSold>quantityInStock)
+        {
+            numberSold = quantityInStock;
+            quantityInStock = 0;
+        }
+        else
+        {
+            quantityInStock -= numberSold;
+        }
+        return numberSold;
+    }
+
+    public void receiveInventory(int numOfNewPhones)
+    {
+        quantityInStock += numOfNewPhones;
     }
 }
