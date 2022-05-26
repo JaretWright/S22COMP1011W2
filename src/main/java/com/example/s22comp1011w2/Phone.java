@@ -1,6 +1,7 @@
 package com.example.s22comp1011w2;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Phone {
@@ -32,12 +33,22 @@ public class Phone {
     }
 
     /**
+     * This method returns an ordered list of valid manufacturers
+     */
+    public static List<String> getManufacturers()
+    {
+        List<String> manufacturers =  Arrays.asList("Apple", "Samsung", "Nokia", "Realme", "Oppo", "Vivo",
+                "Blackberry", "HTC", "Huawei", "Motorola","Google");
+        Collections.sort(manufacturers);
+        return manufacturers;
+    }
+
+    /**
      * This will set the manufacturer (or make) of the phone
      * @param make
      */
     public void setMake(String make) {
-        List<String> manufacturers = Arrays.asList("Apple", "Samsung", "Nokia", "Realme", "Oppo", "Vivo",
-                "Blackberry", "HTC", "Huawei", "Motorola","Google");
+        List<String> manufacturers = getManufacturers();
         if (manufacturers.contains(make))
             this.make = make;
         else
@@ -82,11 +93,19 @@ public class Phone {
     }
 
     /**
+     * This method returns a list of the valid Memory (RAM) sizes for the phone
+     */
+    public static List<Integer> getMemorySizes()
+    {
+        return Arrays.asList(64,128,256,512,1028,2056);
+    }
+
+    /**
      * How many Gigs of memory are  on the phone
      * @param ram - 64, 128, 256 or 512
      */
     public void setRam(int ram) {
-        if (ram == 64 || ram == 128 || ram==256 || ram==512)
+        if (getMemorySizes().contains(ram))
             this.ram = ram;
         else
             throw new IllegalArgumentException("RAM must be 64, 128, 256 or 512");

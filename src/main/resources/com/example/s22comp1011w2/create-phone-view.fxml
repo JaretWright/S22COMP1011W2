@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.s22comp1011w2.CreatePhoneController">
    <children>
       <GridPane layoutX="71.0" layoutY="43.0" prefHeight="240.0" prefWidth="340.0">
@@ -34,8 +33,8 @@
          <children>
             <Label text="Make" />
             <Label text="Model" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" />
+            <TextField fx:id="modelTextField" promptText="Enter Model Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="makeComboBox" prefWidth="150.0" GridPane.columnIndex="1" />
             <Label text="Operating System" GridPane.rowIndex="2" />
             <Label text="Memory" GridPane.rowIndex="3" />
             <Label text="Back Camera MP" GridPane.rowIndex="4" />
@@ -44,24 +43,24 @@
             <Label text="# in Stock" GridPane.rowIndex="7" />
             <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <RadioButton mnemonicParsing="false" text="Android" />
-                  <RadioButton mnemonicParsing="false" text="iOS" />
+                  <RadioButton fx:id="androidRadioButton" mnemonicParsing="false" text="Android" />
+                  <RadioButton fx:id="iosRadioButton" mnemonicParsing="false" text="iOS" />
                </children>
             </HBox>
-            <Spinner GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Spinner GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Spinner fx:id="memorySpinner" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Spinner fx:id="cameraMpSpinner" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
-                  <Slider />
-                  <Label text="Label" />
+                  <Slider fx:id="batterySlider" />
+                  <Label fx:id="batteryLabel" text="Label" />
                </children>
             </HBox>
-            <Spinner GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Spinner fx:id="unitsInStockSpinner" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <Label layoutX="247.0" layoutY="14.0" text="Create new Phone" />
       <Button layoutX="446.0" layoutY="331.0" mnemonicParsing="false" text="Submit" />
-      <Label layoutX="92.0" layoutY="335.0" text="Label" />
+      <Label fx:id="msgLabel" layoutX="92.0" layoutY="335.0" text="Label" />
    </children>
 </AnchorPane>
