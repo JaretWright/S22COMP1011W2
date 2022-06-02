@@ -1,6 +1,7 @@
 package com.example.s22comp1011w2;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBUtility {
     private static String user = DBCrendentials.user;
@@ -57,5 +58,39 @@ public class DBUtility {
 
 
         return phoneID;
+    }
+
+    /**
+     * This method will return a list of all the phones in the DB
+     */
+    public static ArrayList<Phone> getPhonesFromDB()
+    {
+        ArrayList<Phone> phones = new ArrayList<>();
+
+        String sql = "SELECT * FROM phones";
+
+        try(
+                Connection conn = DriverManager.getConnection(connectURL,user,password);
+                Statement statement = conn.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+                ) {
+            while (resultSet.next())
+            {
+                String make = resultSet.getString("make");
+                String model = resultSet.getString("model");
+                String os = resultSet.getString("os");
+                int ram = resultSet.getInt("ram");
+                int backCameraMP = resultSet.getInt("backCameraMP");
+                double price = resultSet.getDouble("price");
+                int batteryLifeInHours = resultSet.getInt("batteryLifeInHours");
+                int quantityInStock = resultSet.getInt("quantityInStock");
+
+                phones.add(new Phone(make,model,os,ram,backCameraMP,price,batteryLifeInHours,quantityInStock));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return phones;
     }
 }
