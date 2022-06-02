@@ -174,6 +174,7 @@ public class CreatePhoneController implements Initializable {
 
         try {
             Phone newPhone = new Phone(make, model, os, ram, backCameraMP, price, batteryLifeInHours, quantityInStock);
+            DBUtility.insertPhoneIntoDB(newPhone);
             msgLabel.setText(newPhone.toString());
         } catch (Exception e)
         {
