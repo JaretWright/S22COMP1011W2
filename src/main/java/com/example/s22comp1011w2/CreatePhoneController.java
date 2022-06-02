@@ -50,8 +50,21 @@ public class CreatePhoneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        msgLabel.setText("");
         makeComboBox.getItems().addAll(Phone.getManufacturers());
         makeComboBox.setPromptText("Select a Brand");
+        makeComboBox.valueProperty().addListener((obs, oldValue, newValue)->{
+            if (newValue.equalsIgnoreCase("Apple"))
+            {
+                iosRadioButton.setSelected(true);
+                modelTextField.setText("iPhone ");
+            }
+            else
+            {
+                androidRadioButton.setSelected(true);
+                modelTextField.setText("");
+            }
+        });
 
         //configure the RadioButtons to belong in a ToggleGroup so only 1 is selected at a time
         osToggleGroup = new ToggleGroup();
@@ -137,16 +150,35 @@ public class CreatePhoneController implements Initializable {
     @FXML
     private void createPhone()
     {
+        double price = -1;
         try {
             String priceText = priceTextField.getText().replaceAll("[^0-9.]*", "");
-            double price = Double.parseDouble(priceText);
+            price = Double.parseDouble(priceText);
             msgLabel.setText("");
         } catch (NumberFormatException e)
         {
             msgLabel.setText("Price must be a valid number (i.e. $549.99)");
         }
 
+        String make = makeComboBox.getValue();
+        String model = modelTextField.getText();
 
+        //casting the "Toggle" to be a RadioButton object
+        RadioButton radioButtonSelected = (RadioButton) osToggleGroup.getSelectedToggle();
+        String os = radioButtonSelected.getText();
+
+        int ram = memorySpinner.getValue();
+        int backCameraMP = cameraMpSpinner.getValue();
+        int batteryLifeInHours = Integer.parseInt(batteryLabel.getText().replaceAll("[^0-9]*",""));
+        int quantityInStock = unitsInStockSpinner.getValue();
+
+        try {
+            Phone newPhone = new Phone(make, model, os, ram, backCameraMP, price, batteryLifeInHours, quantityInStock);
+            msgLabel.setText(newPhone.toString());
+        } catch (Exception e)
+        {
+            msgLabel.setText(e.getMessage());
+        }
     }
 
 }

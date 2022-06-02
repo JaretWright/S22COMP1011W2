@@ -185,4 +185,9 @@ public class Phone {
     {
         quantityInStock += numOfNewPhones;
     }
+
+    public String toString()
+    {
+        return String.format("%s-%s price: $%.2f",make,model,price);
+    }
 }
