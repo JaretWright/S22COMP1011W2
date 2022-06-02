@@ -60,7 +60,7 @@
          </children>
       </GridPane>
       <Label layoutX="247.0" layoutY="14.0" text="Create new Phone" />
-      <Button layoutX="446.0" layoutY="331.0" mnemonicParsing="false" text="Submit" />
+      <Button layoutX="446.0" layoutY="331.0" mnemonicParsing="false" onAction="#createPhone" text="Submit" />
       <Label fx:id="msgLabel" layoutX="92.0" layoutY="335.0" text="Label" />
    </children>
 </AnchorPane>

@@ -100,6 +100,21 @@ public class CreatePhoneController implements Initializable {
                 cameraTextField.setText(oldValue);
             }
         });
+
+        //configure the number of units in stock (min=0, max=1000, default amount = 50)
+        SpinnerValueFactory<Integer> unitsInStockFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,1000,50);
+        unitsInStockSpinner.setValueFactory(unitsInStockFactory);
+        unitsInStockSpinner.setEditable(true);
+        TextField unitsInStockTextField = unitsInStockSpinner.getEditor();
+        unitsInStockTextField.textProperty().addListener((obs, oldValue, newValue) -> {
+            try{
+                Integer.parseInt(newValue);
+            }
+            catch(NumberFormatException e)
+            {
+                unitsInStockTextField.setText(oldValue);
+            }
+        });
     }
 
     private void updateSlider(Number sliderValue)
@@ -115,4 +130,23 @@ public class CreatePhoneController implements Initializable {
             batteryLabel.setText(newValue.toString());
         }
     }
+
+    /**
+     * This method will create a Phone object based on the user inputs
+     */
+    @FXML
+    private void createPhone()
+    {
+        try {
+            String priceText = priceTextField.getText().replaceAll("[^0-9.]*", "");
+            double price = Double.parseDouble(priceText);
+            msgLabel.setText("");
+        } catch (NumberFormatException e)
+        {
+            msgLabel.setText("Price must be a valid number (i.e. $549.99)");
+        }
+
+
+    }
+
 }
