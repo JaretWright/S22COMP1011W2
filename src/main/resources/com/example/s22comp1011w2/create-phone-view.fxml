@@ -67,6 +67,7 @@
             <HBox alignment="CENTER_LEFT" spacing="20.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#createPhone" text="Submit" />
+                  <Button mnemonicParsing="false" onAction="#viewTable" text="View Table Data" />
                   <Label fx:id="msgLabel" text="Label" />
                </children>
             </HBox>

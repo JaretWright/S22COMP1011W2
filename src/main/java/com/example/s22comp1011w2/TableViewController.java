@@ -1,11 +1,13 @@
 package com.example.s22comp1011w2;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -44,6 +46,11 @@ public class TableViewController implements Initializable {
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("priceString"));  //calls the method getPriceString()
         priceColumn.getStyleClass().add("align-right");
         tableview.getItems().addAll(DBUtility.getPhonesFromDB());
+    }
+
+    @FXML
+    private void createNewPhone(ActionEvent event) throws IOException {
+        SceneChanger.changeScenes(event, "create-phone-view.fxml");
     }
 
 }

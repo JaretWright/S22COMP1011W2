@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        ArrayList<Phone> phones = DBUtility.getPhonesFromDB();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("table-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Raj's Great Phone Store!");
