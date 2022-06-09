@@ -1,8 +1,7 @@
 package com.example.s22comp1011w2;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.text.NumberFormat;
+import java.util.*;
 
 public class Phone {
     private String make, model, os;
@@ -157,6 +156,13 @@ public class Phone {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getPriceString()
+    {
+        Locale country = new Locale("en","CA");
+        Currency dollars = Currency.getInstance(country);
+        return NumberFormat.getCurrencyInstance(country).format(price);
     }
 
     /**

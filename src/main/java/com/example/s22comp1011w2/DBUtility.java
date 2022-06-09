@@ -67,7 +67,9 @@ public class DBUtility {
     {
         ArrayList<Phone> phones = new ArrayList<>();
 
-        String sql = "SELECT * FROM phones";
+        String sql = "SELECT phones.phoneID, make, model, os, ram, backCameraMP, price, batteryLifeInHours,quantityInStock,COUNT(customerID) AS unitsSold " +
+                "FROM phones LEFT JOIN sales ON phones.phoneID = sales.phoneID " +
+                "GROUP BY phones.phoneID;";
 
         try(
                 Connection conn = DriverManager.getConnection(connectURL,user,password);
@@ -84,8 +86,10 @@ public class DBUtility {
                 double price = resultSet.getDouble("price");
                 int batteryLifeInHours = resultSet.getInt("batteryLifeInHours");
                 int quantityInStock = resultSet.getInt("quantityInStock");
+                int phoneID = resultSet.getInt("phoneID");
+                int unitsSold = resultSet.getInt("unitsSold");
 
-                phones.add(new Phone(make,model,os,ram,backCameraMP,price,batteryLifeInHours,quantityInStock));
+                phones.add(new Phone(make,model,os,ram,backCameraMP,price,batteryLifeInHours,quantityInStock,phoneID,unitsSold));
             }
         } catch (SQLException e) {
             e.printStackTrace();

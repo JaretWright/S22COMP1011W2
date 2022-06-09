@@ -37,11 +37,13 @@ public class TableViewController implements Initializable {
         //configure the columns to know where they can get their data from
         //the "make" is actually calling the getMake() method
         makeColumn.setCellValueFactory(new PropertyValueFactory<>("make"));
-        modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
-        memoryColumn.setCellValueFactory(new PropertyValueFactory<>("memory"));
+        modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));  //calls the method getModel()
+        memoryColumn.setCellValueFactory(new PropertyValueFactory<>("ram"));   //calls the method getRam()
         phoneIDColumn.setCellValueFactory(new PropertyValueFactory<>("phoneID"));
         unitsSoldColumn.setCellValueFactory(new PropertyValueFactory<>("unitsSold"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("priceString"));  //calls the method getPriceString()
+        priceColumn.getStyleClass().add("align-right");
+        tableview.getItems().addAll(DBUtility.getPhonesFromDB());
     }
 
 }

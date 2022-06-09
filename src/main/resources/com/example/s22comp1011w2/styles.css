@@ -14,3 +14,7 @@
 #header {
     -fx-font-size: 30pt;
 }
+
+.align-right{
+    -fx-alignment: CENTER-RIGHT;
+}
