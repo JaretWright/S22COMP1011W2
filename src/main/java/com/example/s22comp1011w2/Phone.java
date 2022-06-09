@@ -9,6 +9,7 @@ public class Phone {
     private int ram, backCameraMP;
     private double price;
     private int batteryLifeInHours, quantityInStock;
+    private int phoneID, unitsSold;
 
     /**
      * This is the standard constructor - we need all of these items to define a Phone object
@@ -30,6 +31,34 @@ public class Phone {
         setPrice(price);
         setBatteryLifeInHours(batteryLifeInHours);
         setQuantityInStock(quantityInStock);
+    }
+
+    public Phone(String make, String model, String os, int ram, int backCameraMP, double price, int batteryLifeInHours, int quantityInStock, int phoneID, int unitsSold) {
+        this(make, model, os,ram, backCameraMP,  price, batteryLifeInHours,  quantityInStock);
+        setPhoneID(phoneID);
+        setUnitsSold(unitsSold);
+    }
+
+    public int getPhoneID() {
+        return phoneID;
+    }
+
+    public void setPhoneID(int phoneID) {
+        if (phoneID >0)
+            this.phoneID = phoneID;
+        else
+            throw new IllegalArgumentException("PhoneID should be greater than 0");
+    }
+
+    public int getUnitsSold() {
+        return unitsSold;
+    }
+
+    public void setUnitsSold(int unitsSold) {
+        if (unitsSold>=0)
+            this.unitsSold = unitsSold;
+        else
+            throw new IllegalArgumentException("units sold should be greater than or equal to 0");
     }
 
     /**
