@@ -18,3 +18,7 @@
 .align-right{
     -fx-alignment: CENTER-RIGHT;
 }
+
+.align-center{
+    -fx-alignment: CENTER;
+}

@@ -45,12 +45,9 @@ public class TableViewController implements Initializable {
         unitsSoldColumn.setCellValueFactory(new PropertyValueFactory<>("unitsSold"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("priceString"));  //calls the method getPriceString()
         priceColumn.getStyleClass().add("align-right");
+        unitsSoldColumn.getStyleClass().add("align-center");
+        memoryColumn.getStyleClass().add("align-center");
         tableview.getItems().addAll(DBUtility.getPhonesFromDB());
-    }
-
-    @FXML
-    private void createNewPhone(ActionEvent event) throws IOException {
-        SceneChanger.changeScenes(event, "create-phone-view.fxml");
     }
 
 }
