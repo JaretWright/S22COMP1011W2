@@ -184,4 +184,9 @@ public class CreatePhoneController implements Initializable {
         }
     }
 
+    @FXML
+    private void viewTable(ActionEvent event) throws IOException {
+        SceneChanger.changeScenes(event, "table-view.fxml");
+    }
+
 }

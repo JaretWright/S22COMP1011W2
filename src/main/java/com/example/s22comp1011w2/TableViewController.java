@@ -50,4 +50,8 @@ public class TableViewController implements Initializable {
         tableview.getItems().addAll(DBUtility.getPhonesFromDB());
     }
 
+    @FXML
+    private void createPhone(ActionEvent event) throws IOException {
+        SceneChanger.changeScenes(event,"create-phone-view.fxml");
+    }
 }
