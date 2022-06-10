@@ -30,7 +30,7 @@
             <HBox alignment="CENTER_RIGHT" spacing="10.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#createPhone" text="Create New Phone" />
-                  <Button mnemonicParsing="false" text="View Charts" />
+                  <Button mnemonicParsing="false" onAction="#viewCharts" text="View Charts" />
                </children>
             </HBox>
          </children>

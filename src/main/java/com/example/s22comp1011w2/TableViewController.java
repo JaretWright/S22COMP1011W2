@@ -54,4 +54,10 @@ public class TableViewController implements Initializable {
     private void createPhone(ActionEvent event) throws IOException {
         SceneChanger.changeScenes(event,"create-phone-view.fxml");
     }
+
+    @FXML
+    private void viewCharts(ActionEvent event) throws IOException{
+        SceneChanger.changeScenes(event,"chart-view.fxml");
+    }
+
 }
