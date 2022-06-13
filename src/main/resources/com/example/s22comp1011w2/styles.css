@@ -22,3 +22,7 @@
 .align-center{
     -fx-alignment: CENTER;
 }
+
+.chart-legend {
+    -fx-background-color: transparent;
+}

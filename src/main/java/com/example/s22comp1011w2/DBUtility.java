@@ -1,5 +1,10 @@
 package com.example.s22comp1011w2;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -96,5 +101,60 @@ public class DBUtility {
         }
 
         return phones;
+    }
+
+    public static XYChart.Series<String, Integer> getPhonesSoldPerMonth()
+    {
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+        series.setName("Units Sold");
+
+        String sql = "SELECT MONTHNAME(dateSold) AS month, COUNT(customerID) AS unitsSold "+
+                    "FROM SALES " +
+                    "GROUP BY MONTHNAME(dateSold) " +
+                    "ORDER BY MONTH(dateSold);";
+
+        try(
+                Connection conn = DriverManager.getConnection(connectURL,user,password);
+                Statement statement = conn.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+        ) {
+            while (resultSet.next())
+            {
+                String month = resultSet.getString("month");
+                int unitsSold = resultSet.getInt("unitsSold");
+
+                series.getData().add(new XYChart.Data<>(month,unitsSold));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return series;
+    }
+
+    public static ObservableList<PieChart.Data> pieChartSales()
+    {
+        ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+
+        String sql = "SELECT model AS phone,COUNT(customerID) AS unitsSold " +
+                    "FROM phones LEFT JOIN sales ON phones.phoneID = sales.phoneID " +
+                    "GROUP BY phones.phoneID;";
+
+        try(
+                Connection conn = DriverManager.getConnection(connectURL,user,password);
+                Statement statement = conn.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+        ) {
+            while (resultSet.next())
+            {
+                String phone = resultSet.getString("phone");
+                int unitsSold = resultSet.getInt("unitsSold");
+
+                data.addAll(new PieChart.Data(phone, unitsSold));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+
     }
 }
